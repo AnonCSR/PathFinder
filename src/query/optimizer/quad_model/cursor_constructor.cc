@@ -1,0 +1,110 @@
+#include "cursor_constructor.h"
+
+#include "query/executor/cursor_query_executor/mql/cursor_query_executor.h"
+#include "query/optimizer/quad_model/binding_iter_constructor.h"
+
+using namespace MQL;
+
+void CursorConstructor::visit(OpDescribe&) {
+    // TODO:
+    // std::unique_ptr<BindingIter> labels;
+    // std::unique_ptr<BindingIter> properties;
+    // std::unique_ptr<BindingIter> outgoing_connections;
+    // std::unique_ptr<BindingIter> incoming_connections;
+
+    // ObjectId object_id = op_describe.node;
+
+    // VarId label_var(0);
+    // VarId key_var(0);
+    // VarId value_var(1);
+    // VarId from_var(0);
+    // VarId to_var(0);
+    // VarId type_var(1);
+    // VarId edge_var(2);
+
+    // {
+    //     std::array<std::unique_ptr<ScanRange>, 2> ranges;
+    //     ranges[0] = std::make_unique<Term>(object_id);
+    //     ranges[1] = std::make_unique<UnassignedVar>(label_var);
+    //     labels = std::make_unique<IndexScan<2>>(
+    //         *quad_model.node_label,
+    //         std::move(ranges)
+    //     );
+    // }
+
+    // {
+    //     std::array<std::unique_ptr<ScanRange>, 3> ranges;
+    //     ranges[0] = std::make_unique<Term>(object_id);
+    //     ranges[1] = std::make_unique<UnassignedVar>(key_var);
+    //     ranges[2] = std::make_unique<UnassignedVar>(value_var);
+    //     properties = std::make_unique<IndexScan<3>>(
+    //         *quad_model.object_key_value,
+    //         std::move(ranges)
+    //     );
+    // }
+
+    // {
+    //     std::array<std::unique_ptr<ScanRange>, 4> ranges;
+    //     ranges[0] = std::make_unique<Term>(object_id);
+    //     ranges[1] = std::make_unique<UnassignedVar>(to_var);
+    //     ranges[2] = std::make_unique<UnassignedVar>(type_var);
+    //     ranges[3] = std::make_unique<UnassignedVar>(edge_var);
+    //     outgoing_connections = std::make_unique<IndexScan<4>>(
+    //         *quad_model.from_to_type_edge,
+    //         std::move(ranges)
+    //     );
+    // }
+
+    // {
+    //     std::array<std::unique_ptr<ScanRange>, 4> ranges;
+    //     ranges[0] = std::make_unique<Term>(object_id);
+    //     ranges[1] = std::make_unique<UnassignedVar>(type_var);
+    //     ranges[2] = std::make_unique<UnassignedVar>(from_var);
+    //     ranges[3] = std::make_unique<UnassignedVar>(edge_var);
+    //     incoming_connections = std::make_unique<IndexScan<4>>(
+    //         *quad_model.to_type_from_edge,
+    //         std::move(ranges)
+    //     );
+    // }
+
+    // executor = std::make_unique<MQL::DescribeExecutor>(
+    //     std::move(labels),
+    //     std::move(properties),
+    //     std::move(outgoing_connections),
+    //     std::move(incoming_connections),
+    //     op_describe.labels_limit,
+    //     op_describe.properties_limit,
+    //     op_describe.outgoing_limit,
+    //     op_describe.incoming_limit
+    // );
+}
+
+
+void CursorConstructor::visit(OpSet& op_set) {
+    for (auto& set_item : op_set.set_items) {
+        set_vars.insert({ set_item.first, set_item.second });
+    }
+    op_set.op->accept_visitor(*this);
+}
+
+
+void CursorConstructor::visit(OpReturn& op_return) {
+    BindingIterConstructor visitor(set_vars);
+    op_return.accept_visitor(visitor);
+
+    std::vector<VarId> projection_vars;
+    projection_vars.reserve(op_return.projection.size());
+    for (auto&& [var, _] : op_return.projection) {
+        projection_vars.push_back(var);
+    }
+
+    auto var_size = get_query_ctx().get_var_size();
+    path_manager.begin(var_size, std::move(visitor.begin_at_left), false);
+
+    executor = std::make_unique<MQL::CursorQueryExecutor>(
+        std::move(visitor.tmp),
+        std::move(set_vars),
+        std::move(projection_vars),
+        op_return.limit
+    );
+}
