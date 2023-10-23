@@ -1,81 +1,218 @@
+Experiments <!-- omit in toc -->
+================================================================================
+This repository contains the source code, scripts and instructions for the experiments in the paper:
+
+**PathFinder: A unified approach for handling paths in graph query languages**
+
+Extended version of the paper: [PathFinder](Paper_extended.pdf)
+
+**IMPORTANT:** All steps for running the experiments require `python 3.8` to be installed.
+
+Table of Contents <!-- omit in toc -->
+================================================================================
+- [Data Preparation](#data-preparation)
+- [Engines Setup](#engines-setup)
+- [Running the Experiments](#running-the-experiments)
+- [PathFinder](#pathfinder)
+    - [Pokec](#pokec)
+    - [Diamond](#diamond)
+    - [Wikidata](#wikidata)
+- [Neo4j](#neo4j)
+    - [Pokec](#pokec-1)
+    - [Diamond](#diamond-1)
+    - [Wikidata](#wikidata-1)
+- [Kuzu](#kuzu)
+    - [Pokec](#pokec-2)
+    - [Diamond](#diamond-2)
+- [NebulaGraph](#nebulagraph)
+    - [Pokec](#pokec-3)
+    - [Diamond](#diamond-3)
+- [SPARQL](#sparql)
+    - [Pokec](#pokec-4)
+    - [Wikidata](#wikidata-2)
+
+Data Preparation
+================================================================================
+
+Follow the instructions in the [Data Preparation Section](dbs/README.md).
+
+Engines Setup
+================================================================================
+
+For each engine that you want to test, follow the corresponding steps to prepare them for the benchmark:
+
+[PathFinder](pathfinder/README.md)
+
+[Neo4j](neo4j/README.md)
+
+[Kuzu](kuzu/README.md)
+
+[NebulaGraph](nebula/README.md)
+
+If you also want to test the `SPARQL` engines `(Jena, Blazegraph, Virtuoso)`, refer to their respective websites for instructions on installing and importing the data.
+
+For details on how to generate and load the `RDF` data into these `SPARQL` engines, refer to the [Data Preparation Section](dbs/README.md).
+
+Running the Experiments
+================================================================================
+
+From here on, execute all commands from inside the `benchmark` folder in the repository.
+
 PathFinder
 ================================================================================
-PathFinder is a graph oriented database management system.
 
-This project aims for a fully functional and easy-to-extend DBMS that serves as the basis for testing new techniques and algorithms related to databases and graphs.
+### Pokec
 
-Table of Contents
+- Run Benchmark: `python run_pathfinder.py pokec [MODE] [TIMEOUT_MAX] [SEARCH_STRATEGY]`
+
+- The `[MODE]` parameter is an integer that represents which semantic mode to test, it can take the following values:
+  - `0` ALL TRAILS
+  - `1` ANY SHORTEST WALKS
+  - `2` ALL SHORTEST WALKS
+  - `3` ANY TRAILS
+  - `4` ENDPOINTS
+
+- The `[TIMEOUT_MAX]` parameter controls how many timeouts in a row should be encountered before stopping the benchmark
+- The `[SEARCH_STRATEGY]` parameter controls the search algorithm to use when exploring the graph, can be either `bfs` or `dfs`
+- Results are stored inside the `results/pathfinder` folder in the repository
+
+### Diamond
+
+- Run Benchmark: `python run_pathfinder.py diamond [MODE] [TIMEOUT_MAX] [SEARCH_STRATEGY]`
+
+- The `[MODE]` parameter is an integer that represents which semantic mode to test, it can take the following values:
+  - `0` ALL TRAILS
+  - `1` ANY SHORTEST WALKS
+  - `2` ALL SHORTEST WALKS
+  - `3` ANY TRAILS
+
+- The `[TIMEOUT_MAX]` and `[SEARCH_STRATEGY]` parameters are the same as before
+- Results are stored inside the `results/pathfinder` folder in the repository
+
+### Wikidata
+
+- Run Benchmark: `python wdbench-quad-paths.py ../queries/pathfinder/wdbench.txt 100000 [MODE] [SEARCH_STRATEGY]`
+
+- The `[MODE]` parameter is a string which indicates the semantic mode to test, it can take the following values:
+  - `any` ANY WALKS
+  - `all_shortest` ALL SHORTEST WALKS (only allows `bfs` search strategy)
+  - `any_trails` ANY TRAILS
+  - `all_trails` ALL TRAILS
+  - `all_shortest_trails` ALL SHORTEST TRAILS (only allows `bfs` search strategy)
+
+- The `[SEARCH_STRATEGY]` parameter controls the search algorithm to use when exploring the graph, can be either `bfs` or `dfs`
+- Results are stored inside the `results/pathfinder/wdbench` folder in the repository
+
+Neo4j
 ================================================================================
-- [Project Build](#project-build)
-- [Running the Experiments](#runnning-the-experiments)
 
-[Project build](#pathfinder)
+### Pokec
+
+- Run Benchmark: `python run_neo4j.py pokec [MODE] [TIMEOUT_MAX]`
+
+- The `[MODE]` parameter is an integer that represents which semantic mode to test, it can take the following values:
+  - `0` ALL TRAILS
+  - `1` ANY SHORTEST WALKS
+  - `2` ALL SHORTEST WALKS
+  - `3` ENDPOINTS
+
+- The `[TIMEOUT_MAX]` parameter is the same as with `PathFinder`
+- Results are stored inside the `results/neo4j` folder in the repository
+
+### Diamond
+
+- Run Benchmark: `python run_neo4j.py diamond [MODE] [TIMEOUT_MAX]`
+
+- The `[MODE]` parameter is an integer that represents which semantic mode to test, it can take the following values:
+  - `0` ALL TRAILS
+  - `1` ANY SHORTEST WALKS
+  - `2` ALL SHORTEST WALKS
+
+- The `[TIMEOUT_MAX]` parameter is the same as with `PathFinder`
+- Results are stored inside the `results/neo4j` folder in the repository
+
+### Wikidata
+
+- Run Benchmark: `python wdbench_paths_neo4j.py ../queries/neo4j/wdbench.txt`
+
+- This will run with the `ALL TRAILS` path semantic
+- Results are stored inside the `results/neo4j` folder in the repository
+
+Kuzu
 ================================================================================
-PathFinder should be able to be built on any x86-64 Linux distribution.
-On windows, Windows Subsystem for Linux (WSL) can be used.
 
-Install Dependencies:
---------------------------------------------------------------------------------
-PathFinder needs the following dependencies:
-- GCC >= 8.1
-- CMake >= 3.12
-- Git
-- libssl
-- ncursesw and less for the CLI
+### Pokec
 
-On current Debian and Ubuntu based distributions they can be installed by running:
-```bash
-sudo apt update && sudo apt install git g++ cmake libssl-dev libncurses-dev locales less
-```
+- Run Benchmark: `python run_kuzu.py pokec [MODE] [TIMEOUT_MAX]`
 
-The `en_US.UTF-8` locale also needs to be generated.
-On Ubuntu based distributions this can be done as follows:
-```bash
-sudo locale-gen en_US.UTF-8
-```
+- The `[MODE]` parameter is an integer that represents which semantic mode to test, it can take the following values:
+  - `0` ALL WALKS
+  - `1` ANY SHORTEST WALKS
+  - `2` ALL SHORTEST WALKS
+  - `3` ENDPOINTS
 
-On distributions without a patched locale-gen you can run:
-```bash
-sudo sed -i '/en_us.utf-8/Is/^# //g' /etc/locale.gen
-sudo locale-gen
-```
+- The `[TIMEOUT_MAX]` parameter is the same as with `PathFinder`
+- Results are stored inside the `results/kuzu` folder in the repository
 
-Or manually uncomment `en_US.UTF-8` in `/etc/locale.gen` and run:
-```bash
-sudo locale-gen
-```
+### Diamond
 
-Clone the repository
---------------------------------------------------------------------------------
- Clone this repository, enter the repository root directory and set `PF_HOME`:
-```
-git clone git@github.com:AnonCSR/PathFinder.git
-cd PathFinder
-export PF_HOME=$(pwd)
-```
+- Run Benchmark: `python run_kuzu.py diamond [MODE] [TIMEOUT_MAX]`
 
-Install Boost
---------------------------------------------------------------------------------
-Download [`boost_1_81_0.tar.gz`](https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz) using a browser or wget:
-```bash
-wget -q --show-progress https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz
-```
+- The `[MODE]` parameter is an integer that represents which semantic mode to test, it can take the following values:
+  - `0` ALL WALKS
+  - `1` ANY SHORTEST WALKS
+  - `2` ALL SHORTEST WALKS
 
-and run the following in the directory where boost was downloaded:
-```bash
-tar -xf boost_1_81_0.tar.gz
-mkdir -p $PF_HOME/third_party/boost_1_81/include
-mv boost_1_81_0/boost $PF_HOME/third_party/boost_1_81/include
-rm -r boost_1_81_0.tar.gz boost_1_81_0
-```
+- The `[TIMEOUT_MAX]` parameter is the same as with `PathFinder`
+- Results are stored inside the `results/kuzu` folder in the repository
 
-Build the Project:
---------------------------------------------------------------------------------
-Go back into the repository root directory and configure and build PathFinder:
-```
-cmake -B build/Release -D CMAKE_BUILD_TYPE=Release && cmake --build build/Release/
-```
-
-[Running the Experiments](#pathfinder)
+NebulaGraph
 ================================================================================
-ToDo...
+
+### Pokec
+
+- Run Benchmark: `python run_nebula.py pokec [MODE] [TIMEOUT_MAX]`
+
+- The `[MODE]` parameter is an integer that represents which semantic mode to test, it can take the following values:
+  - `0` ALL TRAILS
+  - `1` ANY SHORTEST TRAILS
+  - `2` ALL SHORTEST TRAILS
+  - `3` ALL WALKS
+  - `4` ENDPOINTS
+
+- The `[TIMEOUT_MAX]` parameter is the same as with `PathFinder`
+- Results are stored inside the `results/nebula` folder in the repository
+
+### Diamond
+
+- Run Benchmark: `python run_nebula.py diamond [MODE] [TIMEOUT_MAX]`
+
+- The `[MODE]` parameter is an integer that represents which semantic mode to test, it can take the following values:
+  - `0` ALL TRAILS
+
+- The `[TIMEOUT_MAX]` parameter is the same as with `PathFinder`
+- Results are stored inside the `results/nebula` folder in the repository
+
+SPARQL
+================================================================================
+
+### Pokec
+
+- The queries can be run manually (there are only 12 for the endpoints experiment)
+- They are contained [here](queries/sparql/pokec_endpoints.txt)
+
+### Wikidata
+
+- We provide a benchmark script for SPARQL engines, named `wdbench_sparql.py`
+- This script requires installing the following python library: `pip3 install SPARQLWrapper`
+- Before using it, you need to edit the parameters marked inside the script, indicating necessary details such as the path to each of the engines in your machine
+
+- After editing the parameters, run the benchmark: `python wdbench_sparql.py [ENGINE] ../queries/sparql/wdbench.txt 100000 [OUT_NAME]`
+
+- The `[ENGINE]` parameter can be one of the following:
+  - `JENA`
+  - `BLAZEGRAPH`
+  - `VIRTUOSO`
+
+- The `[OUT_NAME]` parameter is any prefix name you want to give to the output file
+- Results are stored inside the `results/sparql/wdbench` folder in the repository

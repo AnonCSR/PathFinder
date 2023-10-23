@@ -1,0 +1,12 @@
+1,MATCH p=(:Person{id:"696585"})-[:Knows*1..1]->(n) RETURN p LIMIT 100000;
+2,MATCH p=(:Person{id:"696585"})-[:Knows*2..2]->(n) RETURN p LIMIT 100000;
+3,MATCH p=(:Person{id:"696585"})-[:Knows*3..3]->(n) RETURN p LIMIT 100000;
+4,MATCH p=(:Person{id:"696585"})-[:Knows*4..4]->(n) RETURN p LIMIT 100000;
+5,MATCH p=(:Person{id:"696585"})-[:Knows*5..5]->(n) RETURN p LIMIT 100000;
+6,MATCH p=(:Person{id:"696585"})-[:Knows*6..6]->(n) RETURN p LIMIT 100000;
+7,MATCH p=(:Person{id:"696585"})-[:Knows*7..7]->(n) RETURN p LIMIT 100000;
+8,MATCH p=(:Person{id:"696585"})-[:Knows*8..8]->(n) RETURN p LIMIT 100000;
+9,MATCH p=(:Person{id:"696585"})-[:Knows*9..9]->(n) RETURN p LIMIT 100000;
+10,MATCH p=(:Person{id:"696585"})-[:Knows*10..10]->(n) RETURN p LIMIT 100000;
+11,MATCH p=(:Person{id:"696585"})-[:Knows*11..11]->(n) RETURN p LIMIT 100000;
+12,MATCH p=(:Person{id:"696585"})-[:Knows*12..12]->(n) RETURN p LIMIT 100000;

@@ -1,0 +1,13 @@
+1,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows* ?x} LIMIT 100000
+2,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows ?x} LIMIT 100000
+3,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows? ?x} LIMIT 100000
+4,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows? ?x} LIMIT 100000
+5,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000
+6,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000
+7,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000
+8,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000
+9,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000
+10,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000
+11,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000
+12,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000
+13,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000

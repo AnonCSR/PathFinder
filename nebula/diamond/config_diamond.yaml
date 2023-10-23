@@ -1,0 +1,57 @@
+client:
+  version: v3
+  address: "127.0.0.1:9669"
+  user: root
+  concurrencyPerAddress: 10
+  reconnectInitialInterval: 1s
+  retry: 3
+  retryInitialInterval: 1s
+
+manager:
+  spaceName: diamond
+  batch: 128
+  readerConcurrency: 50
+  importerConcurrency: 512
+  statsInterval: 10s
+  hooks:
+    before:
+      - statements:
+        - |
+          DROP SPACE IF EXISTS diamond;
+          CREATE SPACE IF NOT EXISTS diamond(vid_type=FIXED_STRING(64));
+          USE diamond;
+          CREATE TAG N(id string);
+          CREATE TAG INDEX IF NOT EXISTS n_index ON N(id(20));
+          CREATE EDGE E();
+          CREATE EDGE INDEX IF NOT EXISTS e_index ON E();
+        wait: 10s
+
+log:
+  level: INFO
+  console: true
+  files:
+   - logs/nebula-importer.log
+
+sources:
+  - path: ../../dbs/diamond_nodes.csv
+    tags:
+    - name: N
+      id:
+        type: "STRING"
+        index: 0
+      props:
+        - name: "id"
+          type: "STRING"
+          index: 0
+  - path: ../../dbs/diamond_edges.csv
+    batch: 256
+    edges:
+    - name: E
+      src:
+        id:
+          type: "STRING"
+          index: 0
+      dst:
+        id:
+          type: "STRING"
+          index: 1

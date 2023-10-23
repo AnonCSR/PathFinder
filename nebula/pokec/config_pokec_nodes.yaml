@@ -1,0 +1,45 @@
+client:
+  version: v3
+  address: "127.0.0.1:9669"
+  user: root
+  concurrencyPerAddress: 10
+  reconnectInitialInterval: 1s
+  retry: 3
+  retryInitialInterval: 1s
+
+manager:
+  spaceName: pokec
+  batch: 128
+  readerConcurrency: 50
+  importerConcurrency: 512
+  statsInterval: 10s
+  hooks:
+    before:
+      - statements:
+        - |
+          DROP SPACE IF EXISTS pokec;
+          CREATE SPACE IF NOT EXISTS pokec(vid_type=FIXED_STRING(64));
+          USE pokec;
+          CREATE TAG Person(id string);
+          CREATE TAG INDEX IF NOT EXISTS person_index ON Person(id(20));
+          CREATE EDGE Knows();
+          CREATE EDGE INDEX IF NOT EXISTS knows_index ON Knows();
+        wait: 10s
+
+log:
+  level: INFO
+  console: true
+  files:
+   - logs/nebula-importer.log
+
+sources:
+  - path: ../../dbs/pokec_nodes.csv
+    tags:
+    - name: Person
+      id:
+        type: "STRING"
+        index: 0
+      props:
+        - name: "id"
+          type: "STRING"
+          index: 0

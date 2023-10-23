@@ -1,0 +1,40 @@
+client:
+  version: v3
+  address: "127.0.0.1:9669"
+  user: root
+  concurrencyPerAddress: 10
+  reconnectInitialInterval: 1s
+  retry: 3
+  retryInitialInterval: 1s
+
+manager:
+  spaceName: pokec
+  batch: 256
+  readerConcurrency: 50
+  importerConcurrency: 512
+  statsInterval: 10s
+  hooks:
+    before:
+      - statements:
+        - |
+          USE pokec;
+        wait: 10s
+
+log:
+  level: INFO
+  console: true
+  files:
+   - logs/nebula-importer.log
+
+sources:
+  - path: ../../dbs/pokec_edges.csv
+    edges:
+    - name: Knows
+      src:
+        id:
+          type: "STRING"
+          index: 0
+      dst:
+        id:
+          type: "STRING"
+          index: 1
