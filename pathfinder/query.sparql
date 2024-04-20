@@ -1,0 +1,1 @@
+PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows ?x} LIMIT 100000

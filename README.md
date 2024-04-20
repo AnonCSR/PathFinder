@@ -1,10 +1,22 @@
-Experiments <!-- omit in toc -->
+PathFinder Repository <!-- omit in toc -->
 ================================================================================
 This repository contains the source code, scripts and instructions for the experiments in the paper:
 
-**PathFinder: A unified approach for handling paths in graph query languages**
+**PathFinder: Returning Paths in Graph Queries**
 
-Extended version of the paper: [PathFinder](Paper_extended.pdf)
+The extended version of the paper can be found here:
+
+[PathFinder](Paper_extended.pdf)
+  - Contains pipelined pseudo-code for all the algorithms realized through linear iterators (AppendixA); and
+  - Additional experiments that allow us to highlight different aspects of the proposed algorithms (AppendixB)
+
+Given that `AnonymousDB`, which is the foundation `PathFinder` is built on, supports both property graphs with a `GQL`-like language
+ and graphs with `RDF (SPARQL 1.1)`, we also provide a small demonstration of how the proposed approach allows extending `SPARQL`
+ with the ability to return paths: [Returning Paths in SPARQL](pathfinder/SPARQL.md)
+
+We remark that to apply our approach to `SPARQL`, we can use the same algorithm (see the implementation [here](pathfinder/src/query/executor/binding_iter/paths/any_walks/bfs_enum.cc)), but processing the data using the `RDF` index instead of the property paths one.
+
+We next explain how one can replicate the experiments in the paper (including the ones from the extended version).
 
 **IMPORTANT:** All steps for running the experiments require `python 3.8` to be installed.
 
