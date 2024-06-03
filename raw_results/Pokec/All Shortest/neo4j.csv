@@ -1,0 +1,9 @@
+query_number,query,results,status,exec_time_ms,enum_time_ms
+6,"MATCH p=allShortestPaths((:Person{id:""696585""})-[:Knows*1..1]->(n)) RETURN p LIMIT 100000",11,OK,37,5237
+17,"MATCH p=allShortestPaths((:Person{id:""696585""})-[:Knows*1..2]->(n)) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+28,"MATCH p=allShortestPaths((:Person{id:""696585""})-[:Knows*1..3]->(n)) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+39,"MATCH p=allShortestPaths((:Person{id:""696585""})-[:Knows*1..4]->(n)) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+50,"MATCH p=allShortestPaths((:Person{id:""696585""})-[:Knows*1..5]->(n)) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+61,"MATCH p=allShortestPaths((:Person{id:""696585""})-[:Knows*1..6]->(n)) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+72,"MATCH p=allShortestPaths((:Person{id:""696585""})-[:Knows*1..7]->(n)) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+83,"MATCH p=allShortestPaths((:Person{id:""696585""})-[:Knows*1..8]->(n)) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1

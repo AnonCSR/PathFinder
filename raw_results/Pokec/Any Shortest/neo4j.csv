@@ -1,0 +1,4 @@
+query_number,query,results,status,exec_time_ms,enum_time_ms
+6,"MATCH p=shortestPath((:Person{id:""696585""})-[:Knows*1..1]->(n)) RETURN p LIMIT 100000",11,OK,36,4768
+17,"MATCH p=shortestPath((:Person{id:""696585""})-[:Knows*1..2]->(n)) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+28,"MATCH p=shortestPath((:Person{id:""696585""})-[:Knows*1..3]->(n)) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1

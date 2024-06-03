@@ -1,0 +1,14 @@
+query_number,query,results,status,exec_time_ms,enum_time_ms
+1,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows* ?x} LIMIT 100000,0,TIMEOUT,-1,-1
+2,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows ?x} LIMIT 100000,11,OK,35,35
+3,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows? ?x} LIMIT 100000,459,OK,88,90
+4,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows? ?x} LIMIT 100000,24011,OK,1927,1968
+5,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000,100000,OK,3867,5697
+6,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000,100000,OK,2528,3817
+7,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000,100000,OK,1315,2295
+8,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000,100000,OK,405,859
+9,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000,100000,OK,354,736
+10,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000,100000,OK,360,750
+11,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000,100000,OK,374,743
+12,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000,100000,OK,344,724
+13,PREFIX : <http://p.db/> SELECT * WHERE {:696585 :Knows/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows?/:Knows? ?x} LIMIT 100000,100000,OK,354,753

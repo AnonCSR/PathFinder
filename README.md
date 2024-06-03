@@ -16,6 +16,8 @@ Given that `AnonymousDB`, which is the foundation `PathFinder` is built on, supp
 
 We remark that to apply our approach to `SPARQL`, we can use the same algorithm (see the implementation [here](pathfinder/src/query/executor/binding_iter/paths/any_walks/bfs_enum.cc)), but processing the data using the `RDF` index instead of the property paths one.
 
+Raw results for all our experiments are contained [here](raw_results).
+
 We next explain how one can replicate the experiments in the paper (including the ones from the extended version).
 
 **IMPORTANT:** All steps for running the experiments require `python 3.8` to be installed.

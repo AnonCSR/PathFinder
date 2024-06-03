@@ -1,0 +1,17 @@
+query_number,query,results,status,exec_time_ms,enum_time_ms
+1,"MATCH p=(:N{id:""N2997""})-[:E* SHORTEST 1..2]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,125,125
+2,"MATCH p=(:N{id:""N2997""})-[:E* SHORTEST 1..2]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,7,8
+3,"MATCH p=(:N{id:""N2994""})-[:E* SHORTEST 1..4]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,9,10
+4,"MATCH p=(:N{id:""N2991""})-[:E* SHORTEST 1..6]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,8
+5,"MATCH p=(:N{id:""N2988""})-[:E* SHORTEST 1..8]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,9
+6,"MATCH p=(:N{id:""N2985""})-[:E* SHORTEST 1..10]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,9
+7,"MATCH p=(:N{id:""N2982""})-[:E* SHORTEST 1..12]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,9
+8,"MATCH p=(:N{id:""N2979""})-[:E* SHORTEST 1..14]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,9,9
+9,"MATCH p=(:N{id:""N2976""})-[:E* SHORTEST 1..16]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,7,8
+10,"MATCH p=(:N{id:""N2973""})-[:E* SHORTEST 1..18]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,9
+11,"MATCH p=(:N{id:""N2970""})-[:E* SHORTEST 1..20]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,9,10
+12,"MATCH p=(:N{id:""N2967""})-[:E* SHORTEST 1..22]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,9
+13,"MATCH p=(:N{id:""N2964""})-[:E* SHORTEST 1..24]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,9
+14,"MATCH p=(:N{id:""N2961""})-[:E* SHORTEST 1..26]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,9
+15,"MATCH p=(:N{id:""N2958""})-[:E* SHORTEST 1..28]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,10
+16,"MATCH p=(:N{id:""N2955""})-[:E* SHORTEST 1..30]->(:N{id:""N3000""}) RETURN p LIMIT 100000",1,OK,8,9

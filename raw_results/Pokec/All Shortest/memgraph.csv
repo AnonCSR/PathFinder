@@ -1,0 +1,11 @@
+query_number,query,results,status,exec_time_ms,enum_time_ms
+6,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 1 (r n | 1)]->(n) RETURN p LIMIT 100000",11,OK,0,4
+17,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 2 (r n | 1)]->(n) RETURN p LIMIT 100000",433,OK,1,108
+28,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 3 (r n | 1)]->(n) RETURN p LIMIT 100000",20012,OK,0,6455
+39,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 4 (r n | 1)]->(n) RETURN p LIMIT 100000",100000,OK,1,38806
+50,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 5 (r n | 1)]->(n) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+61,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 6 (r n | 1)]->(n) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+72,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 7 (r n | 1)]->(n) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+83,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 8 (r n | 1)]->(n) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+94,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 9 (r n | 1)]->(n) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
+105,"MATCH p=(:Person{id:""696585""})-[:Knows*ALLSHORTEST 10 (r n | 1)]->(n) RETURN p LIMIT 100000",0,TIMEOUT,-1,-1
